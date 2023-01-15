@@ -30,5 +30,5 @@ local RootPart = Character:FindFirstChild("HumanoidRootPart")
 local CFrameLocation = CFrame.new(0, 0, 0) -- Or: Players:FindFirstChild("plr username").Character.Head.CFrame
 
 RootPart.Parent = nil
-RootPart.CFrame = CF
+RootPart.CFrame = CFrameLocation
 RootPart.Parent = Character
