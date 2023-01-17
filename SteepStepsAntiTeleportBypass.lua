@@ -21,14 +21,27 @@ ez ez ez ez ez ez
 
 ]]--
 
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local CoreGui = game:GetService("StarterGui")
+local Players = game.Players
+local LocalPlayer = game.Players.LocalPlayer
 
-local RootPart = Character:FindFirstChild("HumanoidRootPart")
+CoreGui:SetCore("SendNotification", {Title = "Notification", Text = "Attempting to bypass Anti Teleport, please wait!", Duration = 3})
 
-local CFrameLocation = CFrame.new(0, 0, 0) -- Or: Players:FindFirstChild("plr username").Character.Head.CFrame
+Root = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+Root.CFrame = CFrame.new(0, -500, 0)
 
-RootPart.Parent = nil
-RootPart.CFrame = CFrameLocation
-RootPart.Parent = Character
+LocalPlayer.Character.Humanoid.Died:Connect(function()
+	warn("died, now waiting 3 seconds before teleporting")
+	task.wait(4)
+	LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(-738, 2499, -308)
+	
+	Root = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+	Root.CFrame = CFrame.new(0, -500, 0)
+		
+	LocalPlayer.Character.Humanoid.Died:Connect(function()
+		warn("died, now waiting 3 seconds before teleporting again LOL")
+		task.wait(4)
+		LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(-738, 2499, -308)
+		CoreGui:SetCore("SendNotification", {Title = "Notification", Text = "Anti Teleport has been successfully bypassed! Feel free to teleport around now.", Duration = 5})
+	end)
+end)
